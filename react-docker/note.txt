@@ -1,0 +1,11 @@
+docker build -t $IMAGE_NAME .
+docker run  -p 8080:8080 $IMAGE_NAME
+docker run -d -p 8080:8080 $IMAGE_NAME
+docker run -p 8080:8080 $IMAGE_NAME -v "$(pwd):/app" -v /app/node_modules $IMAGE_NAME
+docker ps -a
+docker stop $CONTAINER_ID
+docker rm $CONTAINER_ID
+docker container prune
+
+docker tag $IMAGE_NAME $DOCKER_ID_USER/$IMAGE_NAME
+docker push $DOCKER_ID_USER/$IMAGE_NAME
